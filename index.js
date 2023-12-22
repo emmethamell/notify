@@ -1,6 +1,6 @@
 
 import {initializeApp, applicationDefault} from "firebase-admin/app";
-import {getMessanging} from "firebase-admin/messanging";
+import {getMessaging} from "firebase-admin/messanging";
 import express, { json } from "express";
 
 
