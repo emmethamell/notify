@@ -26,7 +26,7 @@ app.post("/send", function (req, res) {
     
     const message = {
       notification: {
-        title: "Notif",
+        title: 'Notif',
         body: 'This is a Test Notification'
       },
       //can use recievedToken instead of hardcoded token
@@ -34,7 +34,7 @@ app.post("/send", function (req, res) {
       token: "fLSTZfsc6EhhsRLHEqrEsH:APA91bHawgoe1swFzqsdRDWZp4dZj1IK_WIYGzk8umhi8dCiZ9SrgehmNq7ieP62oQLXqjysr-VUqPXvvUJ8qQQr_vA7RsuUmWiMzgaFEls1BHuKHgsx6z4jpeOMjid40pEks1d433ma",
     };
     
-    getMessaging()
+    admin.messaging()
       .send(message)
       .then((response) => {
         res.status(200).json({
