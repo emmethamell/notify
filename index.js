@@ -1,9 +1,10 @@
 
 import admin from 'firebase-admin';
 import express from 'express';
+import serviceAccount from './lunchlink-51a43-firebase-adminsdk-kiyqj-907d692947.json' assert { type: "json" };
 
 admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
+  credential: admin.credential.cert(serviceAccount),
   projectId: 'lunchlink-51a43'
 });
 
