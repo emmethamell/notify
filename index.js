@@ -1,10 +1,11 @@
 
-import {initializeApp, applicationDefault} from "firebase-admin/app";
-import {getMessaging} from "firebase-admin/messaging";
-import express, { json } from "express";
+import admin from 'firebase-admin';
+import express from 'express';
 
-const admin = require('firebase-admin');
-admin.initializeApp();
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  projectId: 'lunchlink-51a43'
+});
 
 const messaging = admin.messaging();
 
@@ -13,17 +14,11 @@ process.env.GOOGLE_APPLICATION_CREDENTIALS;
 const app = express();
 app.use(express.json());
 
-
 app.use(function(req, res, next) {
     res.setHeader("Content-Type", "application/json");
     next();
 })
 
-
-initializeApp({
-  credential: applicationDefault(),
-  projectId: 'lunchlink'
-});
 
 
 app.post("/send", function (req, res) {
