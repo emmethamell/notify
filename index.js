@@ -3,6 +3,10 @@ import {initializeApp, applicationDefault} from "firebase-admin/app";
 import {getMessaging} from "firebase-admin/messaging";
 import express, { json } from "express";
 
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+const messaging = admin.messaging();
 
 process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
