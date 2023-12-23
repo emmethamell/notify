@@ -23,37 +23,33 @@ app.use(function(req, res, next) {
 
 
 app.post("/send", function (req, res) {
-    const receivedToken = req.body.fcmToken;
+    const tokens = req.body.fcmTokens;
+    const headerText = req.body.header;
+    const  bodyText = req.body.body;
     
     const message = {
       notification: {
-        title: 'Notif',
-        body: 'This is a Test Notification'
+        title: headerText,
+        body: bodyText
       },
       //can use recievedToken instead of hardcoded token
-      
-      token: "fLSTZfsc6EhhsRLHEqrEsH:APA91bHawgoe1swFzqsdRDWZp4dZj1IK_WIYGzk8umhi8dCiZ9SrgehmNq7ieP62oQLXqjysr-VUqPXvvUJ8qQQr_vA7RsuUmWiMzgaFEls1BHuKHgsx6z4jpeOMjid40pEks1d433ma",
+      tokens: tokens //should recieve an array of tokens
     };
     
-    admin.messaging()
-      .send(message)
+    admin.messaging().sendEachForMulticast(message)
       .then((response) => {
         res.status(200).json({
           message: "Successfully sent message",
-          token: receivedToken,
+          successCount: response.successCount,
+          failureCount: response.failureCount
         });
         console.log("Successfully sent message:", response);
       })
       .catch((error) => {
-        res.status(400);
-        res.send(error);
+        res.status(400).json(error);
         console.log("Error sending message:", error);
       });
-    
-    
   });
-
-
 
 app.listen(3000, function() {
     console.log("Server is running on port 3000")
